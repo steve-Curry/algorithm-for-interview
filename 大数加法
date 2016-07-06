@@ -1,0 +1,83 @@
+package bigData;
+
+import java.util.Scanner;
+
+public class ADD {
+
+	static int N=100;
+	String s1,s2;
+	int[] a=new int[N];
+	int[] b=new int[N];
+	int[] c=new int[N+1];
+	
+	public static void main(String[] args) {
+		ADD test=new ADD();
+		test.Input();
+		test.add(test.a, test.b);
+		int flag=0;
+		for(int i=test.c.length-1;i>=0;i--)
+		{
+			if(test.c[i]!=0&&flag==0)
+				flag=1;
+			if(flag==1)
+			{
+				System.out.print(test.c[i]);
+			}
+		}
+		
+	}
+	
+	
+	public void Input()
+	{
+		System.out.println("please input two Integer:");
+		Scanner in =new Scanner(System.in);
+		this.s1=in.nextLine();
+		this.s2=in.nextLine();
+		getDigit(s1,a);
+		getDigit(s2,b);
+		in.close();
+	}
+	
+	
+	public void add(int[] a,int[] b)
+	{
+		int alen=0,blen=0;
+		for(int i=a.length-1;i>=0;i--)
+		{
+			if(a[i]!=0)
+			{
+				alen=i+1;
+				break;
+			}
+		}
+		for(int i=b.length-1;i>=0;i--)
+		{
+			if(b[i]!=0)
+			{
+				blen=i+1;
+				break;
+			}
+		}
+	
+		int maxlen=alen>blen?alen:blen;
+		int over=0;
+		for(int i=0;i<maxlen+1;i++)
+		{
+			this.c[i]=(a[i]+b[i]+over)>=10?(a[i]+b[i]+over-10):(a[i]+b[i]+over);
+			over=(a[i]+b[i]+over)/10;
+		}
+			
+	}
+	
+	
+	public void getDigit(String s,int[] a)
+	{
+		int len=s.length();
+		for(int i=0;i<len;i++)
+		{
+			a[i]=s.charAt(len-i-1)-'0';
+		}
+	}
+	
+}
